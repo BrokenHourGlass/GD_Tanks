@@ -1,5 +1,8 @@
 extends Node
 
+export (int) var pop_increase_chance = 25
+export (int) var power_up_spawn_chance = 5
+
 onready var health_bar = $Control/HBoxContainer
 onready var player = get_node("../player tank")
 
@@ -13,6 +16,12 @@ func _ready():
 
 func get_rng():
 	return rng
+	
+func get_pop_increase_chance():
+	return pop_increase_chance
+
+func get_power_up_spawn_chance():
+	return power_up_spawn_chance
 
 func initialize_health_bar(max_health: int) -> void:
 	#ensures health bar is empty before health bar is setup

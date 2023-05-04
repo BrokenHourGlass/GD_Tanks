@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Meshes/turret.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/ptank.gd" type="Script" id=2]
@@ -11,7 +11,8 @@
 [ext_resource path="res://Scripts/spawner_script.gd" type="Script" id=9]
 [ext_resource path="res://Scripts/Game_Manager_script.gd" type="Script" id=10]
 [ext_resource path="res://assets/textures/tornado_skin.png" type="Texture" id=11]
-[ext_resource path="res://Scenes/Bullet_types/Machine_bullet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Bullet_types/richochet_bullet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/power-up.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Shader" id=12]
 code = "shader_type spatial;
@@ -86,6 +87,7 @@ script = ExtResource( 10 )
 [node name="spawner" type="Node" parent="Game_Manager"]
 script = ExtResource( 9 )
 enemy_scene = ExtResource( 8 )
+power_up = ExtResource( 13 )
 spawn_boundaries = [ Vector3( -100, 1, -100 ), Vector3( 100, 1, 100 ) ]
 
 [node name="Control" type="Control" parent="Game_Manager"]
@@ -232,7 +234,7 @@ skeleton = NodePath("../../..")
 transform = Transform( 2.35485, 0, 19.9048, 0, 1, 0, -1.85868, 0, 25.2183, 70.7158, 1, 43.0198 )
 skeleton = NodePath("../../..")
 
-[node name="player tank" type="KinematicBody" parent="."]
+[node name="player tank" type="KinematicBody" parent="." groups=["player"]]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.601769, 0 )
 collision_mask = 6
 script = ExtResource( 2 )

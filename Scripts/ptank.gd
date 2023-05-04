@@ -118,6 +118,8 @@ func has_tank_hit_enemy():
 func _on_Timer_timeout():
 	vulnerable = true
 
-
 func _on_fire_cool_down_timeout():
 	bullet_cool_down = !bullet_cool_down
+	
+func change_bullet_type(new_bullet_scene):
+	bullet_scene = new_bullet_scene

@@ -3,9 +3,13 @@ extends Node
 onready var rng = get_parent().get_rng()
 
 export (PackedScene) var enemy_scene
+export (PackedScene) var power_up
 export (int) var max_population = 10
 export (Array) var spawn_boundaries
 export (float) var spawn_interval = 1.0
+
+var pop_increase_chance: int
+var power_up_spawn_chance: int
 
 var current_population = 0
 var timer
@@ -16,6 +20,9 @@ func _ready():
 	timer.connect("timeout", self, "_on_Timer_timeout")
 	add_child(timer)
 	timer.start()
+	
+	pop_increase_chance = get_parent().get_pop_increase_chance()
+	power_up_spawn_chance = get_parent().get_power_up_spawn_chance()
 
 func _on_Timer_timeout():
 	if current_population < max_population:
@@ -71,9 +78,17 @@ func spawn_enemy(spawn_location):
 	current_population += 1
 	enemy.connect("tree_exiting", self, "_on_Enemy_tree_exiting")
 
+func spawn_power_up(spawn_location):
+	var power = power_up.instance()
+	get_parent().add_child(power)
+	
+	power.global_transform.origin = spawn_location
 
 func _on_Enemy_tree_exiting():
 	current_population -= 1
 	var randint = rng.randi_range(0, 100)
-	if rng.randi_range(0, 100) < 10:
+	if randint < pop_increase_chance:
 		max_population += 1
+	
+	if randint < power_up_spawn_chance:
+		spawn_power_up(choose_spawn_location())

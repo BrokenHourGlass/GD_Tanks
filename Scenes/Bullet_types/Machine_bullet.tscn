@@ -5,7 +5,7 @@
 [sub_resource type="SphereMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0, 0.109804, 1, 1 )
+albedo_color = Color( 0.0313726, 1, 0, 1 )
 
 [sub_resource type="SphereShape" id=3]
 
